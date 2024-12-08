@@ -4,13 +4,16 @@ public class EmployeeWageComputationProblem {
 
     public static void main(String[] args) {
         System.out.println("Welcome to Employee Wage Computation");
-        // uc-1
-        boolean present = Math.random()>0.5;
+        double employeeCheck = Math.random();
         int wagePerHr = 20;
         int empHrs, empWage;
-        if(present){
-            System.out.println("Employee is PRESENT");
+        if(employeeCheck>0.6) {
+            System.out.println("Employee is doing FULL-TIME");
             empHrs = 8;
+        }
+        else if(employeeCheck>0.3) {
+            System.out.println("Employee is doing PART-TIME");
+            empHrs = 4;
         }
         else {
             System.out.println("Employee is ABSENT");

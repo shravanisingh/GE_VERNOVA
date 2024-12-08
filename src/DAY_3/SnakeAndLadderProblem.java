@@ -9,10 +9,14 @@ public class SnakeAndLadderProblem {
         int posFirstPlayer = 0;
         boolean currTurn = true;
         while(posFirstPlayer != 100){
-            if(currTurn){
+            if(currTurn == true){
                 System.out.println("Player 1 is currently at the Position: " + posFirstPlayer);
+                // UC - 2
+                // random function used
                 int dieRolled = (int) (Math.random() * 6 + 1);
+                // UC - 3
                 System.out.println("Dice rolls by: " + dieRolled);
+                // using random to get option
                 int Option = (int) (Math.random() * 3 + 1);
                 switch(Option)
                 {
@@ -33,6 +37,10 @@ public class SnakeAndLadderProblem {
                 }
                 if(posFirstPlayer < 0){
                     posFirstPlayer = 0;
+                }
+                // UC - 5 Exact 100
+                if(posFirstPlayer > 100){
+                    posFirstPlayer -= dieRolled;
                 }
                 System.out.println();
             }

@@ -2,22 +2,31 @@ package src.DAY_2;
 
 public class EmployeeWageComputationProblem {
 
+    private  static final int isFullTime = 1;
+    private  static final int isPartTime = 2;
+    private  static final int wagePerHr = 20;
+
     public static void main(String[] args) {
-        System.out.println("Welcome to Employee Wage Computation");
-        double employeeCheck = Math.random();
-        int wagePerHr = 20;
+        System.out.println("Welcome to Employee Wage Computation Program!");
         int empHrs, empWage;
-        if(employeeCheck>0.6) {
-            System.out.println("Employee is doing FULL-TIME");
-            empHrs = 8;
-        }
-        else if(employeeCheck>0.3) {
-            System.out.println("Employee is doing PART-TIME");
-            empHrs = 4;
-        }
-        else {
-            System.out.println("Employee is ABSENT");
-            empHrs = 0;
+        //RANDOM for type check
+        int employeeType = (int) Math.floor(Math.random() * 10) % 3;
+
+        // UC-4
+        switch (employeeType) {
+            // UC-1 UC-2 and UC-3
+            case isFullTime:
+                System.out.println("Employee is doing FULL-TIME");
+                empHrs = 8;
+                break;
+            case isPartTime:
+                System.out.println("Employee is doing PART-TIME");
+                empHrs = 4;
+                break;
+            default:
+                System.out.println("Employee is ABSENT");
+                empHrs = 0;
+                break;
         }
         empWage = empHrs * wagePerHr;
         System.out.println("Employee's Hours are: " + empHrs);

@@ -1,52 +1,78 @@
 package src.DAY_3;
 
-import java.util.Scanner;
-
 public class SnakeAndLadderProblem {
+
+    public static final int WINNING_POSITION = 100;
+
     public static void main(String[] args) {
         System.out.println("Welcome to the Snake and Ladder Game!");
-        System.out.println("Single Player at Start Position 0");
-        int posFirstPlayer = 0, count = 0;
-        boolean currTurn = true;
-        while(posFirstPlayer != 100){
-            if(currTurn == true){
-                System.out.println("Player 1 is currently at the Position: " + posFirstPlayer);
-                // UC - 2
-                // random function used
-                int dieRolled = (int) (Math.random() * 6 + 1);
-                // UC - 3
-                System.out.println("Dice rolls by: " + dieRolled);
-                // using random to get option
-                int Option = (int) (Math.random() * 3 + 1);
-                switch(Option)
-                {
-                    case 1:
-                        System.out.println("NO PLAY: " + posFirstPlayer);
-                        System.out.println("Player stays at the same position");
-                        break;
-                    case 2:
-                        System.out.println("LADDER: " + (dieRolled + posFirstPlayer));
-                        System.out.println("Player moves ahead by: " + dieRolled);
-                        posFirstPlayer = posFirstPlayer + dieRolled;
-                        break;
-                    case 3:
-                        System.out.println("SNAKE: " + (dieRolled + posFirstPlayer));
-                        System.out.println("Player moves behind by: " + dieRolled);
-                        posFirstPlayer = posFirstPlayer - dieRolled;
-                        break;
+        System.out.println("Two Players start at Position 0");
+
+        int posPlayer1 = 0, posPlayer2 = 0;
+        int diceCountPlayer1 = 0, diceCountPlayer2 = 0;
+
+        boolean isPlayer1Turn = true;
+
+        while (posPlayer1 < WINNING_POSITION && posPlayer2 < WINNING_POSITION) {
+            if (isPlayer1Turn) {
+                System.out.println("Player 1's Turn:");
+                posPlayer1 = playTurn(posPlayer1);
+                diceCountPlayer1++;
+                if (posPlayer1 == WINNING_POSITION) {
+                    System.out.println("Player 1 Wins the Game!");
+                    break;
                 }
-                count++;
-                if(posFirstPlayer < 0){
-                    posFirstPlayer = 0;
+            } else {
+                System.out.println("Player 2's Turn:");
+                posPlayer2 = playTurn(posPlayer2);
+                diceCountPlayer2++;
+                if (posPlayer2 == WINNING_POSITION) {
+                    System.out.println("Player 2 Wins the Game!");
+                    break;
                 }
-                // UC - 5 Exact 100
-                if(posFirstPlayer > 100){
-                    posFirstPlayer -= dieRolled;
-                }
-                System.out.println();
             }
+            isPlayer1Turn = !isPlayer1Turn;
         }
-        System.out.println("Player 1 Rolled Dice " + count + " times");
-        System.out.println("Player 1 has reached the winning Position 100");
+
+        System.out.println("Game Over!");
+        System.out.println("Player 1 rolled the dice " + diceCountPlayer1 + " times.");
+        System.out.println("Player 2 rolled the dice " + diceCountPlayer2 + " times.");
+    }
+
+    public static int playTurn(int currentPosition) {
+        int diceRoll = rollDice();
+        System.out.println("Rolled a: " + diceRoll);
+        int option = getOption();
+
+        switch (option) {
+            case 1:
+                System.out.println("NO PLAY: Player stays at position " + currentPosition);
+                break;
+            case 2:
+                System.out.println("LADDER! Player moves ahead by " + diceRoll);
+                currentPosition += diceRoll;
+                if (currentPosition > WINNING_POSITION) {
+                    currentPosition -= diceRoll; // Revert move if it exceeds 100
+                }
+                currentPosition = playTurn(currentPosition); // Extra turn for ladder
+                break;
+            case 3:
+                System.out.println("SNAKE! Player moves back by " + diceRoll);
+                currentPosition -= diceRoll;
+                if (currentPosition < 0) {
+                    currentPosition = 0; // Reset position to 0 if it goes below
+                }
+                break;
+        }
+        System.out.println("Player's new position: " + currentPosition + "\n");
+        return currentPosition;
+    }
+
+    public static int rollDice() {
+        return (int) (Math.random() * 6 + 1);
+    }
+
+    public static int getOption() {
+        return (int) (Math.random() * 3 + 1);
     }
 }

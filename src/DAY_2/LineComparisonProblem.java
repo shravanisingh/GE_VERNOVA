@@ -41,10 +41,13 @@ public class LineComparisonProblem {
         System.out.println("Length of Line 1: " + len1);
         System.out.println("Length of Line 2: " + len2);
 
-        if (len1.equals(len2)) {
+        int comparison = len1.compareTo(len2);
+        if (comparison == 0) {
             System.out.println("The lines are equal.");
+        } else if (comparison > 0) {
+            System.out.println("Line 1 is greater than Line 2.");
         } else {
-            System.out.println("The lines are not equal.");
+            System.out.println("Line 1 is less than Line 2.");
         }
 
         sc.close();

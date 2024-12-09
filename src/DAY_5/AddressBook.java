@@ -16,6 +16,7 @@ public class AddressBook {
             }
         }
     }
+
     public void createContact() {
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter First Name:");
@@ -61,6 +62,21 @@ public class AddressBook {
                 contact.zip = sc.nextInt();
 
                 System.out.println("Contact updated successfully!");
+                return;
+            }
+        }
+        System.out.println("Contact with the given name not found.");
+    }
+
+    public void deleteContact() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter the First Name of the contact to delete:");
+        String name = sc.next();
+
+        for (Contact contact : adBook) {
+            if (contact.firstName.equalsIgnoreCase(name)) {
+                adBook.remove(contact);
+                System.out.println("Contact deleted successfully!");
                 return;
             }
         }

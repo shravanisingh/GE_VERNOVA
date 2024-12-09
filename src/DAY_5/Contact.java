@@ -1,4 +1,5 @@
 package src.DAY_5;
+
 public class Contact {
     String firstName;
     String lastName;
@@ -16,5 +17,18 @@ public class Contact {
         this.email = email;
         this.phone = phone;
         this.zip = zip;
+    }
+
+    @Override
+    public String toString() {
+        return "Contact{" +
+                "firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", city='" + city + '\'' +
+                ", state='" + state + '\'' +
+                ", email='" + email + '\'' +
+                ", phone=" + phone +
+                ", zip=" + zip +
+                '}';
     }
 }
